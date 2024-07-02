@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Validation function
 const validate = (values) => {
@@ -25,6 +26,7 @@ const validate = (values) => {
 // Event Registration Form Component
 const EventRegistrationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // console.log(isSubmitting);
 
   // Custom hook for form validation
   const useForm = (initialValues, validate) => {
@@ -68,9 +70,12 @@ const EventRegistrationForm = () => {
     validate
   );
 
+  const navigate = useNavigate();
+
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 m-8s">
       <h2 className="text-2xl font-bold mb-4">Event Registration Form</h2>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="form-group">
           <label className="block mb-2">Name</label>
@@ -146,7 +151,6 @@ const EventRegistrationForm = () => {
           Submit
         </button>
       </form>
-
       {isSubmitting && Object.keys(errors).length === 0 && (
         <div className="form-summary mt-4 p-4 border border-green-500 bg-green-100 rounded">
           <h3 className="text-lg font-semibold mb-2">
@@ -171,6 +175,12 @@ const EventRegistrationForm = () => {
           )}
         </div>
       )}
+      <div
+        onClick={() => navigate("/")}
+        className=" mt-20 w-[120px]  block border bg-gray-300  black-white py-2 px-4 rounded cursor-pointer"
+      >
+        Go Back To Home Page
+      </div>
     </div>
   );
 };
